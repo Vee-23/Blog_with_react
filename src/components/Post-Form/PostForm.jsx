@@ -74,7 +74,7 @@ function PostForm({post}) {
             })
 
             return () => {
-                subscription.unSubscirbe()
+                subscription.unsubscribe()
             }
         }, [watch,slugTransform, setValue])
 

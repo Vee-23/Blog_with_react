@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 function Header() {
 
-  const authStatus = useSelector((state) => state.auth.status)
+  const authStatus = useSelector((state) => state.status)
   const navigate = useNavigate()
 
   const navItems = [
@@ -52,7 +52,7 @@ function Header() {
                 item.active ? <li key={item.name}>
                   <button onClick={() => navigate(item.slug)}
                   className='inline-block px-6 py-2
-                  durattion-200 hover:bg-blue-100 rounded-full'>{item.name}</button>
+                  durattion-200 hover:bg-blue-100 hover:text-gray-600 rounded-full'>{item.name}</button>
                 </li> : null
               ))
             }

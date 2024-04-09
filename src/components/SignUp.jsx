@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import authService from '../Appwrite/auth'
+import {Logo, Input, Button} from './index'
 import { Link, useNavigate } from 'react-router-dom'
 import {login} from '../store/authSlice'
 import {useDispatch} from 'react-redux'
@@ -9,7 +10,7 @@ function SignUp() {
     const navigate = useNavigate();
     const [error, setError] = useState("");
     const dispatch = useDispatch();
-    const {register, handleSubmit} = useForm
+    const {register, handleSubmit} = useForm();
 
     const create = async(data) => {
         setError("");
@@ -25,7 +26,7 @@ function SignUp() {
         }
     }
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center text-gray-700">
     <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
     <div className="mb-2 flex justify-center">
             <span className="inline-block w-full max-w-[100px]">
