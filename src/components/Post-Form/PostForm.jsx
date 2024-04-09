@@ -17,7 +17,7 @@ function PostForm({post}) {
         })
 
         const navigate = useNavigate()
-        const userData = useSelector(state => state.user.userData)
+        const userData = useSelector(state => state.userData)
 
         const submit = async(data) => {
             if(post){
@@ -59,8 +59,9 @@ function PostForm({post}) {
             if(value && typeof(value) === 'string'){
                 return value.trim()
                             .toLowerCase()
-                            .replace(/^[a-zA-Z\d\s]+/g, '-')
-                            .replace(/\s/g, '-')
+                            .replace(/[^a-zA-Z\d\s]+/g, "-")
+                            .replace(/\s/g, "-");
+            
             }
             return '';
         })
