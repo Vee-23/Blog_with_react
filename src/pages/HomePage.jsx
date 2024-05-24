@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import appwriteService from "../Appwrite/ServiceConfig"
 import {Container, PostCard} from "../components"
+import { useSelector } from 'react-redux'
 
 function HomePage() {
     const [posts, setPosts] = useState([])
+
+    const status = useSelector((state) => state.status)
+    const DummyMessage = status ? "No Posts Found" : "Login to View Posts";
 
     useEffect(() => {
         appwriteService.getPosts().then((posts) => {
@@ -15,12 +19,12 @@ function HomePage() {
 
     if (posts.length === 0) {
         return (
-            <div className="w-full py-8 mt-4 text-center">
+            <div className="w-full min-h-[70vh] py-8 mt-4 flex items-center justify-center overflow-y-scroll">
                 <Container>
                     <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to read posts
+                        <div className="p-2 w-auto">
+                            <h1 className="text-2xl font-bold text-center hover:text-gray-500">
+                               {DummyMessage}
                             </h1>
                         </div>
                     </div>
@@ -29,7 +33,7 @@ function HomePage() {
         )    }
 
   return (
-    <div className='w-full py-8'>
+    <div className='w-full min-h-[70vh] py-8 overflow-y-scroll'>
       <Container>
         <div className='flex flex-wrap'>
             {posts.map((post) => (

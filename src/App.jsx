@@ -28,8 +28,8 @@ function App() {
   }, [])
 
   return !loading ? (
-    <div className='text-white min-h-screen flex flex-wrap content-between p-2 bg-slate-800'>
-      <div className='w-full block text-center'>
+    <div className='text-white min-h-screen flex flex-wrap content-between p-2 bg-gradient-to-r from-cyan-950 to-purple-950'>
+      <div className='w-full h-[98vh] block text-center'>
         <Header />
         <main>
           <Outlet />

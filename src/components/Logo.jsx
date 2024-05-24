@@ -1,10 +1,11 @@
 import React from 'react'
+import PageLogo from '../assets/Business_(442).jpg'
 
 function Logo({width = '100px'}) {
   return (
-    <div>
-      Logo
-    </div>
+   <div>
+    <img src={PageLogo} width={width} className='rounded-full' alt="Web app logo" />
+   </div>
   )
 }
 
