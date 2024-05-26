@@ -18,6 +18,21 @@ function AllPosts() {
         })
         .catch()
 
+        if (posts.length === 0) {
+          return (
+              <div className="w-full min-h-[70vh] py-8 mt-4 flex items-center justify-center overflow-y-scroll">
+                  <Container>
+                      <div className="flex flex-wrap">
+                          <div className="p-2 w-auto">
+                              <h1 className="text-2xl font-bold text-center hover:text-gray-500">
+                                 No Posts found yet
+                              </h1>
+                          </div>
+                      </div>
+                  </Container>
+              </div>
+          )    }
+
   return (
     <div className='w-full py-8'>
       <Container>
