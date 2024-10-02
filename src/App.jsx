@@ -28,8 +28,8 @@ function App() {
   }, [])
 
   return !loading ? (
-    <div className='text-white min-h-screen flex flex-wrap content-between p-2 bg-gradient-to-r from-cyan-950 to-purple-950'>
-      <div className='w-full h-[98vh] block text-center'>
+    <div className='text-white min-h-screen min-w-full fixed p-2 bg-gradient-to-r from-cyan-950 to-purple-950 overflow-y-scroll'>
+      <div className='w-full h-[98vh]'>
         <Header />
         <main>
           <Outlet />

@@ -19,7 +19,7 @@ function HomePage() {
 
     if (posts.length === 0) {
         return (
-            <div className="w-full min-h-[70vh] py-8 mt-4 flex items-center justify-center overflow-y-scroll">
+            <div className="w-full min-h-[70vh] py-8 mt-4 flex items-center justify-center">
                 <Container>
                     <div className="flex flex-wrap">
                         <div className="p-2 w-auto">
@@ -33,7 +33,7 @@ function HomePage() {
         )    }
 
   return (
-    <div className='w-full min-h-[70vh] py-8 overflow-y-scroll'>
+    <div className='w-full min-h-[70vh] py-8 '>
       <Container>
         <div className='flex flex-wrap'>
             {posts.map((post) => (
