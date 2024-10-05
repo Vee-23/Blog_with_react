@@ -13,7 +13,7 @@ export class Service {
             this.bucket = new Storage(this.client);
     }
 
-    async createPost({title, slug, content, featureImage, status, userId}){
+    async createPost({title, slug, content, previewText, featured_Image, status, userId}){
         try {
             return await this.databases.createDocument(
                 config.appwriteDatabaseId,
@@ -21,8 +21,9 @@ export class Service {
                 slug,
                 {
                     title,
+                    previewText,
                     content,
-                    featureImage,
+                    featured_Image,
                     status,
                     userId
                 }
@@ -33,7 +34,7 @@ export class Service {
         }
     }
 
-    async updatePost(slug, {title, content, featureImage, status}){
+    async updatePost(slug, {title, content, previewText, featured_Image, status}){
         try {
             return await this.databases.updateDocument(
                 config.appwriteDatabaseId,
@@ -41,8 +42,9 @@ export class Service {
                 slug,
                 {
                     title,
+                    previewText,
                     content,
-                    featureImage,
+                    featured_Image,
                     status,
                 }
             )
@@ -86,7 +88,6 @@ export class Service {
             )
         } catch (error) {
             throw console.log("Appwrite service :: getPosts - Error", error);
-            return false
         }
     }
 

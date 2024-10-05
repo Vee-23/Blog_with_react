@@ -8,9 +8,12 @@ import { useSelector } from 'react-redux'
 function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue,
         control, getValues } = useForm({
+            mode: 'onSubmit',
+            reValidateMode: 'onSubmit',
             defaultValues: {
                 title: post?.title || '',
                 slug: post?.slug || '',
+                previewText: post?.previewText || '',
                 content: post?.content || '',
                 status: post?.status || 'active',
             }
@@ -20,16 +23,18 @@ function PostForm({ post }) {
     const userData = useSelector(state => state.userData)
 
     const submit = async (data) => {
+
         if (post) {
-            const file = data.images[0] ? appwriteService.uploadFile(data.image[0]) : null
+
+            const file = data.image[0] ? appwriteService.uploadFile(data.image[0]) : null
 
             if (file) {
-                appwriteService.deleteFile(post.featuredImage)
+                appwriteService.deleteFile(post.featured_Image)
             }
             const DBpost = await appwriteService.updatePost(
                 post.$id, {
                 ...data,
-                featureImage: file ? file.$id : undefined,
+                feature_Image: file ? file.$id : undefined,
             }
             )
 
@@ -37,12 +42,13 @@ function PostForm({ post }) {
                 navigate(`/post/${DBpost.$id}`)
             }
         } else {
-            const file = data.images[0] ? appwriteService
-                .uploadFile(data.image[0]) : null
+            const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null
+
+            console.log(file)
 
             if (file) {
                 const fileId = file.$id;
-                data.featuredImage = fileId
+                data.featured_Image = fileId
                 const DBPost = await appwriteService.createPost({
                     ...data,
                     userId: userData.$id,
@@ -79,9 +85,10 @@ function PostForm({ post }) {
         }
     }, [watch, slugTransform, setValue])
 
+
     return (
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap justify-center">
-            
+
             <div className='flex flex-row flex-wrap gap-[5vw]'>
                 <div className='w-[45vw] px-1'>
                     <Input
@@ -90,15 +97,23 @@ function PostForm({ post }) {
                         className="mb-4"
                         {...register("title", { required: true })}
                     />
+                    
                     <Input
                         label="Slug :"
                         placeholder="Slug"
                         className="mb-4"
-                        read="readonly"
+                        {...{readOnly: "readonly"}}
                         {...register("slug", { required: true })}
                         onInput={(e) => {
                             setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                         }}
+                    />
+
+                    <Input
+                        label="Preview Text :"
+                        placeholder="preview text"
+                        className="mb-4"
+                        {...register("previewText", { required: true })}
                     />
 
                 </div>
@@ -114,7 +129,7 @@ function PostForm({ post }) {
                     {post && (
                         <div className="w-full mb-4">
                             <img
-                                src={appwriteService.getFilePreview(post.featuredImage)}
+                                src={appwriteService.getFilePreview(post.featured_Image)}
                                 alt={post.title}
                                 className="rounded-lg"
                             />
@@ -136,10 +151,10 @@ function PostForm({ post }) {
             </div>
 
             <div className="w-full px-2">
-                    <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
-                </div>
+                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+            </div>
 
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-[50%] my-4">
+            <Button type="submit" bgColor={post ? "bg-green-500" : "bg-blue-400"} className="w-[50%] my-4">
                 {post ? "Update" : "Submit"}
             </Button>
 

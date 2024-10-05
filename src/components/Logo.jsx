@@ -1,5 +1,5 @@
 import React from 'react'
-import PageLogo from '../assets/Business_(442).jpg'
+import PageLogo from '../assets/3r3ld6eo.png'
 
 function Logo({width = '100px'}) {
   return (
